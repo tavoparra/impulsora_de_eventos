@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('unit_price') ? ' has-error' : '' }}">
-                            {!! Form::label('unit_price', 'Precio unitario', array('class' => 'col-md-4 control-label')) !!}
+                            {!! Form::label('unit_price', 'Precio local', array('class' => 'col-md-4 control-label')) !!}
 
                             <div class="col-md-6">
                                 {!! Form::number('unit_price', null, array('class' => 'form-control', 'required' => 'required', 'step' => '.5')) !!}
@@ -62,6 +62,20 @@
                                 @if ($errors->has('unit_price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('unit_price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('foreign_price') ? ' has-error' : '' }}">
+                            {!! Form::label('foreign_price', 'Precio foráneo', array('class' => 'col-md-4 control-label')) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::number('foreign_price', null, array('class' => 'form-control', 'required' => 'required', 'step' => '.5')) !!}
+
+                                @if ($errors->has('foreign_price'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('foreign_price') }}</strong>
                                     </span>
                                 @endif
                             </div>

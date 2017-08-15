@@ -160,7 +160,9 @@
 </div>
     <script type="text/javascript">
         $('#reservation_date').datepicker({
-           format: 'yyyy-mm-dd'
+           format: 'yyyy-mm-dd',
+           language: 'es',
+           locale: 'es'
          });
     </script>
 @endsection
