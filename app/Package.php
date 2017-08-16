@@ -12,7 +12,7 @@ class Package extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'package_price', 'published', 'category_id'
+        'name', 'description', 'package_price', 'foreign_package_price', 'published', 'category_id'
     ];
 
     public function products() {

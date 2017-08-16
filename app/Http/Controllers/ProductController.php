@@ -28,6 +28,7 @@ class ProductController extends Controller
             'description' => 'max:255',
             'quantity' => 'integer',
             'unit_price' => 'numeric',
+            'package_price' => 'numeric',
             'published' => 'boolean',
             'category_id' => 'exists:categories,id'
 

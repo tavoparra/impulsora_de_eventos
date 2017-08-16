@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Client;
 use Kodeine\Acl\Models\Eloquent\Role;
-use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class ClientController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,8 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('users.create', array('roles' => $roles));
+        return view('clients.create');
     }
 
     /**
@@ -59,10 +57,6 @@ class UserController extends Controller
         ]);
         $user->save();
 
-        // Delete actual roles if any and save the roles provided
-        $user->revokeAllRoles();
-        $user->assignRole($request['roles']);
-
         return redirect('users');
     }
 
@@ -73,8 +67,8 @@ class UserController extends Controller
      */
     public function list()
     {
-        $users = User::all();
-        return view('users.list', array('users' => $users));
+        $clients = Client::all();
+        return view('clients.list', array('clients' => $clients));
     }
 
     /**
@@ -82,39 +76,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function detail(User $user)
+    public function detail(Client $client)
     {
-        $roles = Role::all();
-
-        return view('users.detail', ['roles' => $roles])->with('user', $user);
-    }
-
-    /**
-     * Shows interface for updating logged user password
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function updatePassword(Request $request)
-    {
-        $message = '';
-        return view('users.update-password', ['message' => $message]);
-    }
-
-    /**
-     * Validates and saves the new password
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function updatePasswordSave(Request $request)
-    {
-        $validation['new_password'] = 'required|min:6|confirmed';
-        $this->validate($request, $validation);
-
-        $user = Auth::user();
-        $user->fill(['password' => bcrypt($request['new_password'])]);
-        $user->save();
-
-        $message = 'El password ha sido actualizado';
-        return view('users.update-password', ['message' => $message]);
+        return view('clients.detail')->with('client', $client);
     }
 }

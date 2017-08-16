@@ -23,6 +23,12 @@ class RoleTableSeeder extends Seeder
         ]);
 
         $roles[] = Role::create([
+            'name' => 'Administrar clientes',
+            'slug' => 'clients.administrator',
+            'description' => 'Permiso para administrar clients'
+        ]);
+
+        $roles[] = Role::create([
             'name' => 'Administrar categorías',
             'slug' => 'categories.administrator',
             'description' => 'Permiso para administrar categorías'

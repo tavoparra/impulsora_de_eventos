@@ -30,7 +30,8 @@ class PackageController extends Controller
             'name' => 'required|max:255|unique:packages,name,'.$id,
             'description' => 'max:255',
             'qty' => 'integer',
-            'unit_price' => 'numeric',
+            'package_price' => 'numeric',
+            'foreign_package_price' => 'numeric',
             'published' => 'boolean',
             'category_id' => 'exists:categories,id',
             'product' => 'required'

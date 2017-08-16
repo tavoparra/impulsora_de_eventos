@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('package_price') ? ' has-error' : '' }}">
-                            {!! Form::label('package_price', 'Precio', array('class' => 'col-md-3 control-label')) !!}
+                            {!! Form::label('package_price', 'Precio local', array('class' => 'col-md-3 control-label')) !!}
 
                             <div class="col-md-7">
                                 {!! Form::number('package_price', null, array('class' => 'form-control', 'required' => 'required', 'step' => '.5')) !!}
@@ -59,6 +59,20 @@
                                 @if ($errors->has('package_price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('package_price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('foreign_package_price') ? ' has-error' : '' }}">
+                            {!! Form::label('foreign_package_price', 'Precio foráneo', array('class' => 'col-md-3 control-label')) !!}
+
+                            <div class="col-md-7">
+                                {!! Form::number('foreign_package_price', null, array('class' => 'form-control', 'required' => 'required', 'step' => '.5')) !!}
+
+                                @if ($errors->has('foreign_package_price'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('foreign_package_price') }}</strong>
                                     </span>
                                 @endif
                             </div>

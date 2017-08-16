@@ -28,6 +28,20 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function() {
     Route::post('/save/{id?}', 'UserController@save');
 });
 
+// User
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function() {
+    Route::get('/update-password', 'UserController@updatePassword');
+    Route::post('/update-password', 'UserController@updatePasswordSave');
+});
+
+// Clients
+Route::group(['prefix' => 'clients', 'middleware' => ['auth']], function() {
+    Route::get('/', 'ClientController@list');
+    Route::get('/create', 'ClientController@create');
+    Route::get('/{user}', 'ClientController@detail')->where('user', '[A-Za-z0-9._-]+');
+    Route::post('/save/{id?}', 'ClientController@save');
+});
+
 // Categories
 Route::group(['prefix' => 'categories', 'middleware' => ['auth']], function() {
     Route::get('/', 'CategoryController@list');

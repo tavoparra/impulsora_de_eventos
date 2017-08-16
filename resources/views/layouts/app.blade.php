@@ -25,6 +25,7 @@
         ]); ?>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 </head>
 <body>
     <div>
@@ -71,6 +72,19 @@
                                 </ul>
                             </li>
                             @endrole
+                            @role ('clients.administrator')
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Clientes <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ url('/clients') }}">Lista de clientes</a>
+                                        <a href="{{ url('/clients/create') }}">Nuevo cliente</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @endrole
                             @role ('categories.administrator')
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -113,6 +127,10 @@
                                 </button>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ url('/user/update-password') }}">Cambiar contraseña</a>
+                                    </li>
+                                    <li class="divider"></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
