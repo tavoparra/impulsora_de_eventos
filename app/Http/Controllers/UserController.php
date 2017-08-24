@@ -51,17 +51,21 @@ class UserController extends Controller
         $this->validate($request, $validation);
 
         $user = User::findOrNew($id);
-        $user->fill([
+        $fields = [
             'name' => $request['name'],
             'username' => $request['username'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-        ]);
+            'email' => $request['email']
+        ];
+
+        if ($request['password']) {
+            $fields['password'] = bcrypt($request['password']);
+        }
+
+        $user->fill($fields);
         $user->save();
 
         // Delete actual roles if any and save the roles provided
-        $user->revokeAllRoles();
-        $user->assignRole($request['roles']);
+        $user->syncRoles($request['roles']);
 
         return redirect('users');
     }
