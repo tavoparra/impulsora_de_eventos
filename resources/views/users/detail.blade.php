@@ -54,7 +54,7 @@
 
                             <div class="col-md-6">
                             @foreach ($roles as $rol)
-                                {!! Form::checkbox('roles[]', $rol->slug, $user->hasRole($rol->slug))." ".$rol->description !!}<br/>
+                                {!! Form::checkbox('roles[]', $rol->slug, in_array($rol->slug, $user_roles))." ".$rol->description !!}<br/>
                             @endforeach
                             </div>
                         </div>

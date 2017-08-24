@@ -38,4 +38,11 @@ class User extends Authenticatable
         return 'username';
     }
 
+    /**
+     * Create relationship with roles for showing them in users section
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
 }

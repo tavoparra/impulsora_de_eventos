@@ -89,8 +89,9 @@ class UserController extends Controller
     public function detail(User $user)
     {
         $roles = Role::all();
+        $user_roles = array_column($user->roles->toArray(), 'slug');
 
-        return view('users.detail', ['roles' => $roles])->with('user', $user);
+        return view('users.detail', ['roles' => $roles, 'user_roles' => $user_roles])->with('user', $user);
     }
 
     /**
