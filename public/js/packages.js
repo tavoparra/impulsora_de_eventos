@@ -36,4 +36,8 @@ $(document).ready(function(){
         }
     });
 
+    // For showing the package image
+    $("#imgModalLink").click(function(event){
+        $("#modalImgContainer").attr("src", $(this).attr("data-image"));
+    });
 });

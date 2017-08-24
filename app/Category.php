@@ -14,4 +14,12 @@ class Category extends Model
     protected $fillable = [
         'name', 'description'
     ];
+
+    /**
+     * Relate to its corresponding products
+     */
+    public function products()
+    {
+        return $this->hasMany('App\Product');
+    }
 }

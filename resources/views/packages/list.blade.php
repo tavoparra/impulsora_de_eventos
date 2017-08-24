@@ -11,6 +11,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Categoría</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
                         </tr>
@@ -19,6 +20,7 @@
                     @foreach ($packages as $package)
                         <tr>
                             <td><a href={{ url('packages/'.$package->id) }}>{{ $package->id }}</a></td>
+                            <td><a href={{ url('categories/'.$package->category->id.'/items') }}>{{ $package->category->name }}</a></td>
                             <td><a href={{ url('packages/'.$package->id) }}>{{ $package->name }}</a></td>
                             <td><a href={{ url('packages/'.$package->id) }}>{{ $package->description }}</a></td>
                         </tr>

@@ -12,12 +12,20 @@ class Package extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'package_price', 'foreign_package_price', 'published', 'category_id'
+        'name', 'description', 'package_price', 'foreign_package_price', 'published', 'category_id', 'image'
     ];
 
     public function products() {
         return $this->belongsToMany('App\Product')
                 ->withPivot('qty');
+    }
+
+    /**
+     * Relate product to its category
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
     }
 
     public function getContentAttribute() {

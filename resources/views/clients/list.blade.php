@@ -22,7 +22,7 @@
                             <td><a href={{ url('clients/'.$client->id) }}>{{ $client->id }}</a></td>
                             <td><a href={{ url('clients/'.$client->id) }}>{{ $client->name }}</a></td>
                             <td class="hidden-xs"><a href={{ url('clients/'.$client->id) }}>{{ $client->rfc }}</a></td>
-                            <td><a href={{ url('users/'.$client->id) }}>{{ $client->status }}</a></td>
+                            <td>{{ $client->status }}</td>
                         </tr>
                     @endforeach
                     </tbody>

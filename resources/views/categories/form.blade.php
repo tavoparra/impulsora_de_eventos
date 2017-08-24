@@ -39,6 +39,14 @@
                             </div>
                         </div>
 
+                        @if(isset($category))
+                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                            <a class="col-md-6 col-md-offset-4" href="{{ url('categories/'.$category->id.'/items') }}">
+                                <button class="btn btn-default">Ver artículos</button>
+                            </a>
+                        </div>
+                        @endif
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit($submitText, array('class' => 'btn btn-primary')) !!}

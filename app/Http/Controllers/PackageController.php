@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Package;
 use App\Product;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 
 class PackageController extends Controller
 {
@@ -34,7 +36,8 @@ class PackageController extends Controller
             'foreign_package_price' => 'numeric',
             'published' => 'boolean',
             'category_id' => 'exists:categories,id',
-            'product' => 'required'
+            'product' => 'required',
+            'image' => 'image'
         ];
 
         $messages = [
@@ -56,6 +59,12 @@ class PackageController extends Controller
         $package->fill($request->all());
         $package['published'] = $request->input('published', false);
         $package->products()->detach();
+        if ($request->hasFile('image')) {
+            $image = Input::file('image');
+
+            $package['image'] = $this->saveImage($image);
+        }
+
         $package->save();
 
         if ($request->input('product')) {
@@ -79,5 +88,13 @@ class PackageController extends Controller
                 'product_options' => $product_options
             ]
         );
+    }
+
+    protected function saveImage($image) {
+        $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+        $name = $timestamp.'_'.$image->getClientOriginalName();
+        $image->move(public_path().'/images/', $name);
+
+        return $name;
     }
 }

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript" src="/js/products.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -8,9 +9,9 @@
                 <div class="panel-heading">{{ $title }}</div>
                 <div class="panel-body">
                 @if (isset($product))
-                    {!! Form::model($product, array('url' => ['products/save', $product->id], 'class' => 'form-horizontal', 'role' => 'form')) !!}
+                    {!! Form::model($product, array('url' => ['products/save', $product->id], 'class' => 'form-horizontal', 'role' => 'form', 'files' => true)) !!}
                 @else
-                    {!! Form::open(['url' => ['products/save'], 'class' => 'form-horizontal', 'role' => 'form']) !!}
+                    {!! Form::open(['url' => ['products/save'], 'class' => 'form-horizontal', 'role' => 'form', 'files' => true]) !!}
                 @endif
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         {!! Form::label('name', 'Nombre', array('class' => 'col-md-4 control-label')) !!}
@@ -95,6 +96,28 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                            {!! Form::label('image', 'Imagen', array('class' => 'col-md-4 control-label')) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::file('image') !!}
+
+                                @if (isset($product))
+                                    @if ($product->image != '')
+                                        <div><a id="imgModalLink" data-image="/images/{{ $product->image }}" data-toggle="modal" data-target="#imageModal">Ver Actual</a></div>
+                                    @else
+                                        <div>No existe imagen asignada</div>
+                                    @endif
+                                @endif
+
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-froup">
                             <div class="col-md-7 col-md-offset-3">
                             @if (!isset($product))
@@ -117,4 +140,5 @@
         </div>
     </div>
 </div>
+@include('partials/image-modal')
 @endsection

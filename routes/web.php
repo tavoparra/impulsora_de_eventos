@@ -38,7 +38,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function() {
 Route::group(['prefix' => 'clients', 'middleware' => ['auth']], function() {
     Route::get('/', 'ClientController@list');
     Route::get('/create', 'ClientController@create');
-    Route::get('/{user}', 'ClientController@detail')->where('user', '[A-Za-z0-9._-]+');
+    Route::get('/{id}', 'ClientController@detail')->where('id', '[0-9]+');
     Route::post('/save/{id?}', 'ClientController@save');
 });
 
@@ -46,6 +46,7 @@ Route::group(['prefix' => 'clients', 'middleware' => ['auth']], function() {
 Route::group(['prefix' => 'categories', 'middleware' => ['auth']], function() {
     Route::get('/', 'CategoryController@list');
     Route::get('/{id}', 'CategoryController@detail');
+    Route::get('/{id}/items', 'CategoryController@items');
     Route::get('/create', 'CategoryController@create');
     Route::post('/save/{id?}', 'CategoryController@save');
 });

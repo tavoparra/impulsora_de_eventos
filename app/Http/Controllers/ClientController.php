@@ -8,6 +8,13 @@ use Kodeine\Acl\Models\Eloquent\Role;
 
 class ClientController extends Controller
 {
+    private $status_list = [
+        'Malo' => 'Malo',
+        'Regular' => 'Regular',
+        'Bueno' => 'Bueno',
+        'Excelente' => 'Excelente'
+    ];
+
     /**
      * Create a new controller instance.
      *
@@ -25,7 +32,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        return view('clients.form', ['title' => 'Nuevo Cliente', 'submitText' => 'Crear', 'status_list' => $this->status_list]);
     }
 
     /**
@@ -38,26 +45,22 @@ class ClientController extends Controller
     {
         $validation = [
             'name' => 'required|max:255',
-            'username' => 'required|unique:users,username,'.$id.'|min:6|max:255',
-            'email' => 'required|email|max:255|unique:users,email,'.$id,
+            'rfc' => 'max:14'
         ];
-
-        if (!$id) {
-            $validation['password'] = 'required|min:6|confirmed';
-        }
 
         $this->validate($request, $validation);
 
-        $user = User::findOrNew($id);
-        $user->fill([
+        $client = Client::findOrNew($id);
+        $client->fill([
             'name' => $request['name'],
-            'username' => $request['username'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
+            'rfc' => $request['rfc'],
+            'address' => $request['address'],
+            'phone' => $request['phone'],
+            'status' => $request['status'],
         ]);
-        $user->save();
+        $client->save();
 
-        return redirect('users');
+        return redirect('clients');
     }
 
     /**
@@ -76,8 +79,11 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function detail(Client $client)
+    public function detail($id)
     {
-        return view('clients.detail')->with('client', $client);
+        $client = Client::find($id);
+        return view('clients.form',
+            ['client' => $client, 'title' => 'Detalle de cliente', 'submitText' => 'Actualizar', 'status_list' => $this->status_list]
+        );
     }
 }

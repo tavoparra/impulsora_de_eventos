@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Product;
+use App\Package;
 
 class CategoryController extends Controller
 {
@@ -33,6 +35,25 @@ class CategoryController extends Controller
         return view(
             'categories.form',
             ['title' => 'Detalle de categoría', 'submitText' => 'Actualizar', 'category' => $category]
+        );
+    }
+
+    /**
+     * Renders list of products and packages for the given category
+     */
+    public function items($id) {
+        $category = Category::find($id);
+        $products = Product::where('category_id', $id)
+                    ->where('published', true)
+                    ->get();
+
+        $packages = Package::where('category_id', $id)
+                    ->where('published', true)
+                    ->get();
+        
+        return view(
+            'categories.items',
+            compact(['products', 'packages', 'category'])
         );
     }
 }

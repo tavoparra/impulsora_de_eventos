@@ -13,6 +13,7 @@
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th data-orderable="false"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,6 +22,7 @@
                             <td><a href={{ url('categories/'.$category->id) }}>{{ $category->id }}</a></td>
                             <td><a href={{ url('categories/'.$category->id) }}>{{ $category->name }}</a></td>
                             <td><a href={{ url('categories/'.$category->id) }}>{{ $category->description }}</a></td>
+                            <td><a href={{ url('categories/'.$category->id.'/items') }}>Ver artículos</a></td>
                         </tr>
                     @endforeach
                     </tbody>
