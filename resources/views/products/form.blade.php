@@ -104,7 +104,12 @@
 
                                 @if (isset($product))
                                     @if ($product->image != '')
-                                        <div><a id="imgModalLink" data-image="/images/{{ $product->image }}" data-toggle="modal" data-target="#imageModal">Ver Actual</a></div>
+                                        Actual:<br/>
+                                        <div>
+                                            <a id="imgModalLink" data-image="/images/{{ $product->image }}" data-toggle="modal" data-target="#imageModal">
+                                                <img src="/images/thumbnails/{{ $product->image }}" />
+                                            </a>
+                                        </div>
                                     @else
                                         <div>No existe imagen asignada</div>
                                     @endif

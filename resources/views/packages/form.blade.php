@@ -135,7 +135,12 @@
 
                                 @if (isset($package))
                                     @if ($package->image != '')
-                                        <div><a id="imgModalLink" data-image="/images/{{ $package->image }}" data-toggle="modal" data-target="#imageModal">Ver Actual</a></div>
+                                        Actual:<br/>
+                                        <div>
+                                            <a id="imgModalLink" data-image="/images/{{ $package->image }}" data-toggle="modal" data-target="#imageModal">
+                                                <img src="/images/thumbnails/{{ $package->image }}" />
+                                            </a>
+                                        </div>
                                     @else
                                         <div>No existe imagen asignada</div>
                                     @endif

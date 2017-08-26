@@ -66,7 +66,22 @@ class ProductController extends Controller
     protected function saveImage($image) {
         $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
         $name = $timestamp.'_'.$image->getClientOriginalName();
-        $image->move(public_path().'/images/', $name);
+        $route = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR;
+
+        // Resize image to a maximum of 500px height and save
+        $img = \Image::make($image);
+        $img->resize(null, 500, function($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $img->save($route.$name);
+
+        // Create a thumbnail for small display
+        $img->resize(null, 150, function($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $img->save($route.'thumbnails/'.$name);
 
         return $name;
     }
