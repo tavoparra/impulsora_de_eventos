@@ -12,6 +12,21 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'rfc', 'address', 'phone', 'email', 'status'
+        'name', 'phone', 'email', 'comments', 'status'
     ];
+
+
+   /**
+    * Has one RFC
+    */
+   public function rfc() {
+       return $this->hasOne('App\Rfc');
+   }
+
+   /**
+    * Has many addresses
+    */
+   public function addresses() {
+       return $this->hasMany('App\Address');
+   }
 }

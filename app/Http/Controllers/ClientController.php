@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use App\Rfc;
 use Kodeine\Acl\Models\Eloquent\Role;
 
 class ClientController extends Controller
@@ -45,7 +46,8 @@ class ClientController extends Controller
     {
         $validation = [
             'name' => 'required|max:255',
-            'rfc' => 'max:14'
+            'email' => 'email',
+            'status' => 'required|in:Malo,Regular,Bueno,Excelente'
         ];
 
         $this->validate($request, $validation);
@@ -53,12 +55,21 @@ class ClientController extends Controller
         $client = Client::findOrNew($id);
         $client->fill([
             'name' => $request['name'],
-            'rfc' => $request['rfc'],
-            'address' => $request['address'],
+            'email' => $request['email'],
             'phone' => $request['phone'],
             'status' => $request['status'],
+            'comments' => $request['comments'],
         ]);
         $client->save();
+
+
+        // If rfc has non empty fields we save it
+        $rfc_info = $request->get('rfc');
+        if (array_filter($rfc_info)) {
+            $rfc = new Rfc;
+            $rfc->fill(array_merge($rfc_info, ['client_id' => $client->id]));
+            $rfc->save();
+        }
 
         return redirect('clients');
     }

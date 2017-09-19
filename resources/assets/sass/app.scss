@@ -8,4 +8,6 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-//mix.sass("resources/assets/sass/packages.css", "public/css/");
+@import "resources/assets/sass/admin.scss";
+@import "resources/assets/sass/packages.scss";
+@import "resources/assets/sass/reservations.scss";

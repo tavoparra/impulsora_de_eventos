@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<script type="text/javascript" src="/js/reservations.js"></script>
-<link href="/css/reservations.css" rel="stylesheet" />
+<style>
+div.bootstrap-datetimepicker-widget {
+    display: block;
+}
+</style>
 <div class="container">
     <div class="row">
     @if (count($errors) > 0)
@@ -158,11 +161,12 @@
         </div>
     </div>
 </div>
-    <script type="text/javascript">
-        $('#reservation_date').datepicker({
-           format: 'yyyy-mm-dd',
-           language: 'es',
-           locale: 'es'
-         });
-    </script>
+@endsection
+
+@section('page_scripts')
+<script type="text/javascript" src="/js/reservations.js"></script>
+<script type="text/javascript">
+    $('#reservation_date').datetimepicker({
+     });
+</script>
 @endsection

@@ -32,6 +32,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_scripts')
 <script>
 	$('#usersTable').DataTable({
         language: {

@@ -9,7 +9,7 @@
         <h4 class="modal-title">Imagen</h4>
       </div>
       <div class="modal-body">
-	    <img id="modalImgContainer" style="width: 100%" />
+	    <img id="modalImgContainer"/>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

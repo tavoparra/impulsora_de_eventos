@@ -1,0 +1,19 @@
+.modal-body {
+    text-align: center;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+a#addAddressBtn {
+    margin-bottom: 15px;
+}
+
+input#autocomplete {
+    margin: 5px;
+}
+
+div.pac-container {
+   z-index: 1050 !important;
+}

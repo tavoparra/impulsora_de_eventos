@@ -30,6 +30,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_scripts');
 <script>
 	$('#packagesTable').DataTable({
         language: {
