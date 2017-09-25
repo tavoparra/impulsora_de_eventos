@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<script type="text/javascript" src="/js/products.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -146,4 +145,7 @@
     </div>
 </div>
 @include('partials/image-modal')
+@endsection
+@section('page_scripts')
+<script type="text/javascript" src="/js/products.js"></script>
 @endsection

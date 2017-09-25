@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<script type="text/javascript" src="/js/packages.js"></script>
-<link href="/css/packages.css" rel="stylesheet" />
 <div class="container">
     <div class="row">
 @if (count($errors) > 0)
@@ -177,4 +175,7 @@
     </div>
 </div>
 @include('partials/image-modal')
+@endsection
+@section('page_scripts')
+<script type="text/javascript" src="/js/packages.js"></script>
 @endsection
