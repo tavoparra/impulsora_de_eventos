@@ -29,9 +29,37 @@
                             {!! Form::label('', 'Direcciones', array('class' => 'col-md-4 control-label')) !!}
 
                             <div class="col-md-6">
-                                <ul id="address-list">
-                                    <li id="no-address-li">No se ha definido ninguna dirección</li>
-                                </ul>
+                                <div id="address-list">
+                                    <div id="no-address-div">No se ha definido ninguna dirección</div>
+                                    @if (isset($client))
+                                    @foreach ($client->addresses as $index => $address)
+                                        <div id="address-panel-{{ $index }}" class="panel panel-info address-panel">
+                                            <div class="panel-heading">
+                                                <a href="#address-detail-{{ $index }}" data-toggle="collapse" aria-expanded="true">
+                                                    <h3 class="panel-title">{{ $address->address_name }}</h3>
+                                                </a>
+                                                <input name="addresses[{{ $index }}][client_id]" value="{{ $address->client_id }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][address_name]" value="{{ $address->address_name }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][address]" value="{{ $address->address }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][street]" value="{{ $address->street }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][number]" value="{{ $address->number }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][colony]" value="{{ $address->colony }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][city]" value="{{ $address->city }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][state]" value="{{ $address->state }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][zip]" value="{{ $address->zip }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][lat]" value="{{ $address->lat }}" type="hidden">
+                                                <input name="addresses[{{ $index }}][long]" value="{{ $address->long }}" type="hidden">
+                                            </div>
+                                            <div class="panel-body panel-collapse collapse" id="address-detail-{{ $index }}" aria-expanded="true" style="">
+                                                Calle: {{ $address->street }} #{{ $address->number }}<br>
+                                                Col.: {{ $address->colony }}<br>
+                                                León. {{ $address->city }}<br>
+                                                C.P.: {{ $address->zip }}
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @endif
+                                </div>
                                     <a id="addAddressBtn" data-toggle="modal" data-target="#addressModal" class="btn btn-primary">
                                         Agregar dirección
                                     </a>
@@ -100,7 +128,7 @@
                             </h3>
                         </div>
 
-                        <div class="collapse" id="rfc-info">
+                        <div class="collapse {{ isset($client) && (count($client->rfc) > 0) ? 'in' : '' }} " id="rfc-info">
                             <div class="form-group{{ $errors->has('rfc.rfc') ? ' has-error' : '' }}">
                             {!! Form::label('rfc[rfc]', 'R.F.C.', array('class' => 'col-md-4 control-label')) !!}
                                 <div class="col-md-6">
@@ -250,8 +278,11 @@
 
     var pIndex = 0;
 
-    var liTemplate =                   '<li class="addressItem">' +
-                                            '<span class="address_name">{ADDRESS_NAME}</span>' +
+    var liTemplate =                   '<div id="address-panel-{COUNTER}" class="panel panel-info address-panel">' +
+                                            '<div class="panel-heading">' +
+                                            '<a href="#address-detail-{COUNTER}" data-toggle="collapse">' +
+                                                '<h3 class="panel-title">{ADDRESS_NAME}</h3>' +
+                                            '</a>' +
                                             '<input type="hidden" name="addresses[{COUNTER}][address_name]" value="{ADDRESS_NAME}" />' +
                                             '<input type="hidden" name="addresses[{COUNTER}][address]" value="{ADDRESS}" />' +
                                             '<input type="hidden" name="addresses[{COUNTER}][street]" value="{STREET}" />' +
@@ -262,21 +293,20 @@
                                             '<input type="hidden" name="addresses[{COUNTER}][zip]" value="{ZIP}" />' +
                                             '<input type="hidden" name="addresses[{COUNTER}][lat]" value="{LATITUDE}" />' +
                                             '<input type="hidden" name="addresses[{COUNTER}][long]" value="{LONGITUDE}" />' +
-                                            '<div>' +
+                                            '</div>' +
+                                            '<div class="panel-body panel-collapse collapse" id="address-detail-{COUNTER}">' +
                                                 'Calle: {STREET} #{NUMBER}<br/>' +    
                                                 'Col.: {COLONY}<br/>' +    
                                                 '{CITY}. {STATE}<br/>' +    
                                                 'C.P.: {ZIP}' +    
                                             '</div>' +
-                                        '</li>';
+                                        '</div>';
 
-    var counter = $(".itemRow").length;
+    var counter = $(".address-panel").length;
 
-    if (counter === 0) {
-        $("#itemsTable").hide();
-    } else {
-        $("#noProductsSpan").hide();
-    }
+    if (counter !== 0) {
+        $("#no-address-div").hide();
+    } 
 
     $("#confirmAddAddressBtn").click(function(){
       if ( $(".location-field[value='']").length == 0 && $("#address_name").val() != "") {
@@ -301,15 +331,6 @@
       } else {
           $("#address-error").show();
       }
-    });
-
-    $("#itemsTable").on("click", "a img", function(){
-        $(this).closest("tr").remove();
-        
-        if ($(".itemRow").length == 0) {
-            $("#itemsTable").hide();
-            $("#noProductsSpan").show();
-        }
     });
 </script>
 @endsection

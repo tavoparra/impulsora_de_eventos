@@ -12,7 +12,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
-                            <th class="hidden-xs">RFC</th>
+                            <th class="hidden-xs">E-mail</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -21,7 +21,7 @@
                         <tr>
                             <td><a href={{ url('clients/'.$client->id) }}>{{ $client->id }}</a></td>
                             <td><a href={{ url('clients/'.$client->id) }}>{{ $client->name }}</a></td>
-                            <td class="hidden-xs"><a href={{ url('clients/'.$client->id) }}>{{ $client->rfc }}</a></td>
+                            <td class="hidden-xs"><a href={{ url('clients/'.$client->id) }}>{{ $client->email }}</a></td>
                             <td>{{ $client->status }}</td>
                         </tr>
                     @endforeach

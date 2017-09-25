@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use App\Rfc;
+use App\Address;
 use Kodeine\Acl\Models\Eloquent\Role;
 
 class ClientController extends Controller
@@ -69,6 +70,16 @@ class ClientController extends Controller
             $rfc = new Rfc;
             $rfc->fill(array_merge($rfc_info, ['client_id' => $client->id]));
             $rfc->save();
+        }
+
+        if ($request->input('addresses')) {
+            foreach ($request->input('addresses') as $address_info) {
+                if (!array_key_exists('client_id', $address_info)) {
+                    $address = new Address;
+                    $address->fill(array_merge($address_info, ['client_id' => $client->id]));
+                    $address->save();
+                }
+            }
         }
 
         return redirect('clients');

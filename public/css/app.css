@@ -7688,4 +7688,42 @@ button.close {
   }
 }
 
+.modal-body {
+  text-align: center;
+}
+
+.modal-body img {
+  max-width: 100%;
+}
+
+a#addAddressBtn {
+  margin-bottom: 15px;
+}
+
+input#autocomplete {
+  margin: 5px;
+}
+
+div.pac-container {
+  z-index: 1050 !important;
+}
+
+#itemsTable {
+  width: 100%;
+}
+
+#itemsTable td {
+  text-align: left;
+}
+
+#itemsTable img {
+  float: right;
+  margin: 0 10px 10px 0;
+}
+
+.packageDesc {
+  font-size: .8em;
+  font-style: italic;
+}
+
 /*# sourceMappingURL=app.css.map */

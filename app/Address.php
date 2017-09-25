@@ -14,4 +14,6 @@ class Address extends Model
     protected $fillable = [
         'client_id', 'address_name', 'address', 'street', 'number', 'colony', 'city', 'state', 'zip', 'lat', 'long', 'addres_type'
     ];
+
+    public $timestamps = false;
 }
